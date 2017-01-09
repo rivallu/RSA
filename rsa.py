@@ -97,6 +97,10 @@ def chiffre(message):
 def dechiffre(intA):
 	message=''
 	for i in intA :
+		i = (i**d)%n
+		i = DecodageAlphabet(i)
+		message += i
+	return message
 
 
 #####################################################################################
@@ -132,3 +136,6 @@ if __name__ == '__main__':
     assert(aPuisBModuloN(10,1,11)==10)
     assert(aPuisBModuloN(10,3,11)==10)
     assert(aPuisBModuloN(5,2,25)==0)
+
+	#test pour les fonctions chiffre et dechiffre
+	assert(dechiffre(chiffre('ALEXANDRE'))=='ALEXANDRE')
