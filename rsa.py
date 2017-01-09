@@ -67,12 +67,11 @@ def TrouvePremier(max):
 
 def initialiseCodageAlphabet():
     codageAlphabet=[]
-    for i in range(0,26):
-        lettre=65+i
-        if SontPremierEntreEux(lettre,n):
-            codageAlphabet.append((lettre**e)%n)
+    while(len(codageAlphabet)!=26):
+        premier=TrouvePremier(500)
+        if not( premier in codageAlphabet):
+            codageAlphabet.append(premier)
     return codageAlphabet
-
 
 def DecodageAlphabet(IntA):
     for i in range(0, len(codageAlphabet)) :
@@ -119,9 +118,8 @@ if __name__ == '__main__':
     # Test pour la fonction CalculInverse
     assert(CalculInverse(5,7)==3)
     assert(CalculInverse(3,11)==4)
-    print(initialiseCodageAlphabet())
 
-	#test pour la fonction aPuisBModuloN
-	assert(aPuisBModuloN(10,1,11)==10)
-	assert(aPuisBModuloN(10,3,11)==10)
-	assert(aPuisBModuloN(5,2,25)==0)
+    #test pour la fonction aPuisBModuloN
+    assert(aPuisBModuloN(10,1,11)==10)
+    assert(aPuisBModuloN(10,3,11)==10)
+    assert(aPuisBModuloN(5,2,25)==0)
