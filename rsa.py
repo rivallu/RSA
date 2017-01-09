@@ -36,16 +36,16 @@ def IsFirst(intA):
 
 def SontPremierEntreEux(intA, intB):
     a = intA
-	b = intB
-	reste = 1
-	while reste != 0 :
-		reste = a%b
-		a = b
-		b = reste
-	if a == 1 :
-		return True
-	else :
-		return False
+    b = intB
+    reste = 1
+    while reste != 0 :
+        reste = a%b
+        a = b
+        b = reste
+    if a == 1 :
+        return True
+    else :
+        return False
 
 
 #####################################################################################
@@ -74,12 +74,14 @@ def CalculInverse(intA, intMod):
         if (intA*i)%intMod==1:
             return i
     return -1
+
 if __name__ == '__main__':
     # test pour la fonction IsFirst
     assert(IsFirst(40)==False)
     assert(IsFirst(7)==True)
     assert(IsFirst(517)==False)
     assert(IsFirst(173)==True)
+
     #Test de la fonction SontPremierEntreEux
     assert(SontPremierEntreEux(13,15)==True)
     assert(SontPremierEntreEux(22,10)==False)
@@ -87,7 +89,7 @@ if __name__ == '__main__':
     assert(SontPremierEntreEux(8,24)==False)
 
     # Test pour la fonction CalculInverse
-    assert(CalculInverse()==)
-    assert(CalculInverse()==)
-    assert(CalculInverse()==)
-    assert(CalculInverse()==)
+    assert(CalculInverse(5,7)==3)
+    assert(CalculInverse(3,11)==4)
+    # assert(CalculInverse(,)==)
+    # assert(CalculInverse(,)==)
