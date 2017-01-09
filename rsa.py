@@ -13,8 +13,9 @@ q=11
 Phin=(p-1)*(q-1)
 e=13
 d=37
-n=(p*q)
+n=p*q
 Alphabet = [chr(65 + i) for i in range(0, 26)]
+codageAlphabet=[]
 
 #####################################################################################
 # Test si un nombre est premier     							                    #
@@ -24,7 +25,7 @@ Alphabet = [chr(65 + i) for i in range(0, 26)]
 
 def IsFirst(intA):
     result=True
-    racine=int(sqrt(intA))
+    racine=int(sqrt(intA))+1
     for i in range(1,racine):
         reste=intA%i
         if reste==0 and i!=1:
@@ -66,40 +67,43 @@ def TrouvePremier(max):
 	return premier
 
 def initialiseCodageAlphabet():
-    codageAlphabet=[]
     while(len(codageAlphabet)!=26):
-        premier=TrouvePremier(500)
+        premier=TrouvePremier(215)
         if not( premier in codageAlphabet):
             codageAlphabet.append(premier)
     return codageAlphabet
 
-def DecodageAlphabet(IntA):
+def DecodageAlphabet(intA):
     for i in range(0, len(codageAlphabet)) :
-        if IntA == codageAlphabet[i]:
+        if intA == codageAlphabet[i]:
             return i
 
 def EntierLettre(lettre):
-    return ord(lettre)
+    i=ord(lettre)-65
+    return codageAlphabet[i]
 
 def aPuisBModuloN(intA,intB,intMod):
    mod = intA%intMod
-   return (mod**intB)%intMod
+   result=(mod**intB)%intMod
+   return result
 
 def chiffre(message):
-	messageChiffre = []
-	for i in message :
-		chiffre = EntierLettre(i)
-		chiffre = aPuisBModuloN(chiffre, e, n)
-		messageChiffre.append(chiffre)
+    messageChiffre = []
+    for i in message :
+        chiffre = EntierLettre(i)
+        chiffre = aPuisBModuloN(chiffre, e, n)
+        messageChiffre.append(chiffre)
     return messageChiffre
 
 def dechiffre(intA):
-	message=''
-	for i in intA :
-		i = (i**d)%n
-		i = DecodageAlphabet(i)
-		message += i
-	return message
+    message=''
+    for i in intA :
+        # i = (i**d)%n
+        print(i)
+        i = DecodageAlphabet(i)
+        print(i)
+        message += Alphabet[i]
+    return message
 
 
 #####################################################################################
@@ -120,6 +124,7 @@ if __name__ == '__main__':
     assert(IsFirst(7)==True)
     assert(IsFirst(517)==False)
     assert(IsFirst(173)==True)
+    assert(IsFirst(35)==False)
 
     #Test de la fonction SontPremierEntreEux
     assert(SontPremierEntreEux(13,15)==True)
@@ -136,5 +141,8 @@ if __name__ == '__main__':
     assert(aPuisBModuloN(10,3,11)==10)
     assert(aPuisBModuloN(5,2,25)==0)
 
-	#test pour les fonctions chiffre et dechiffre
-	assert(dechiffre(chiffre('ALEXANDRE'))=='ALEXANDRE')
+    initialiseCodageAlphabet()
+    print('message chiffré => {}'.format(chiffre('ALEXANDRE')))
+    print('codageAlphabet => {}'.format(codageAlphabet))
+	# #test pour les fonctions chiffre et dechiffre
+    assert(dechiffre(chiffre('ALEXANDRE'))=='ALEXANDRE')
