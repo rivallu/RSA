@@ -8,12 +8,11 @@ import random as rd
 #####################################################################################
 #                                       Variable Globale                            #
 #####################################################################################
-p=7
-q=11
-Phin=(p-1)*(q-1)
-e=13
-d=37
-n=(p*q)
+p =
+q =
+Phin =
+e =
+d =
 Alphabet = [chr(65 + i) for i in range(0, 26)]
 
 #####################################################################################
@@ -66,24 +65,22 @@ def TrouvePremier(max):
 	return premier
 
 def initialiseCodageAlphabet():
-    codageAlphabet=[]
-    for i in range(0,26):
-        lettre=65+i
-        if SontPremierEntreEux(lettre,n):
-            codageAlphabet.append((lettre**e)%n)
-    return codageAlphabet
 
-#
-# def DecodageAlphabet(IntA):
-#
-# def EntierLettre(lettre):
-#     return ord(lettre)
-#
-# def aPuisBModuloN(intA,intB,intMod):
-#
-# def chiffre(message):
-#
-# def dechiffre(intA):
+
+def DecodageAlphabet(IntA):
+	for i in range(0, len(codageAlphabet)) :
+		if IntA == codageAlphabet[i]:
+			return i
+
+def EntierLettre(lettre):
+
+def aPuisBModuloN(intA,intB,intMod):
+	mod = intA%intMod
+	return (mod**intB)%intMod
+
+def chiffre(message):
+
+def dechiffre(intA):
 
 
 #####################################################################################
@@ -114,4 +111,11 @@ if __name__ == '__main__':
     # Test pour la fonction CalculInverse
     assert(CalculInverse(5,7)==3)
     assert(CalculInverse(3,11)==4)
-    print(initialiseCodageAlphabet())
+    # assert(CalculInverse(,)==)
+    # assert(CalculInverse(,)==)
+
+	#test pour la fonction aPuisBModuloN
+	assert(aPuisBModuloN(10,1,11)==10)
+	assert(aPuisBModuloN(10,3,11)==10)
+	assert(aPuisBModuloN(5,2,25)==0)
+    
