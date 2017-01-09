@@ -61,7 +61,15 @@ def TrouvePremier(max):
 		valid = IsFirst(premier)
 	return premier
 
+def initialiseCodageAlphabet():
 
+
+def DecodageAlphabet(IntA):
+
+def EntierLettre(lettre):
+
+def aPuisBModuloN(intA,intB,intMod):
+    
 
 #####################################################################################
 # Description de la fonction									                    #
