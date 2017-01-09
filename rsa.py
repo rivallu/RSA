@@ -91,8 +91,7 @@ def chiffre(message):
 		chiffre = EntierLettre(i)
 		chiffre = aPuisBModuloN(chiffre, e, n)
 		messageChiffre.append(chiffre)
-	return messageChiffre
-		
+    return messageChiffre
 
 def dechiffre(intA):
 	message=''
