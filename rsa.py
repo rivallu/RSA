@@ -120,3 +120,8 @@ if __name__ == '__main__':
     assert(CalculInverse(5,7)==3)
     assert(CalculInverse(3,11)==4)
     print(initialiseCodageAlphabet())
+
+	#test pour la fonction aPuisBModuloN
+	assert(aPuisBModuloN(10,1,11)==10)
+	assert(aPuisBModuloN(10,3,11)==10)
+	assert(aPuisBModuloN(5,2,25)==0)
