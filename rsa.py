@@ -69,7 +69,11 @@ def DecodageAlphabet(IntA):
 def EntierLettre(lettre):
 
 def aPuisBModuloN(intA,intB,intMod):
-    
+
+def chiffre(message):
+
+def dechiffre(intA):
+
 
 #####################################################################################
 # Description de la fonction									                    #
