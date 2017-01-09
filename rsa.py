@@ -62,11 +62,18 @@ def TrouvePremier(max):
 	return premier
 
 def initialiseCodageAlphabet():
+    codageAlphabet=[]
+    for i in range(0,26):
+        lettre=65+i
+        if SontPremierEntreEux(lettre,n):
+            codageAlphabet[i]=(lettre**e)%n
+    return codageAlphabet
 
 
 def DecodageAlphabet(IntA):
 
 def EntierLettre(lettre):
+    return ord(lettre)
 
 def aPuisBModuloN(intA,intB,intMod):
 
