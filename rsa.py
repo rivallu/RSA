@@ -67,11 +67,12 @@ def TrouvePremier(max):
 	return premier
 
 def initialiseCodageAlphabet():
-    while(len(codageAlphabet)!=26):
-        premier=TrouvePremier(215)
-        if not( premier in codageAlphabet):
-            codageAlphabet.append(premier)
-    return codageAlphabet
+    for i in range(0,215):
+        if SontPremierEntreEux(i,215):
+            if len(codageAlphabet)==26:
+                return codageAlphabet
+            if not( i in codageAlphabet):
+                codageAlphabet.append(i)
 
 def DecodageAlphabet(intA):
     for i in range(0, len(codageAlphabet)) :
@@ -83,8 +84,9 @@ def EntierLettre(lettre):
     return codageAlphabet[i]
 
 def aPuisBModuloN(intA,intB,intMod):
-   mod = intA%intMod
-   result=(mod**intB)%intMod
+   # mod = intA%intMod
+   # result=(mod**intB)%intMod
+   result=(intA**intB)%intMod
    return result
 
 def chiffre(message):
@@ -98,10 +100,8 @@ def chiffre(message):
 def dechiffre(intA):
     message=''
     for i in intA :
-        # i = (i**d)%n
-        print(i)
+        i = (i**d)%n
         i = DecodageAlphabet(i)
-        print(i)
         message += Alphabet[i]
     return message
 
@@ -142,7 +142,8 @@ if __name__ == '__main__':
     assert(aPuisBModuloN(5,2,25)==0)
 
     initialiseCodageAlphabet()
-    print('message chiffré => {}'.format(chiffre('ALEXANDRE')))
-    print('codageAlphabet => {}'.format(codageAlphabet))
-	# #test pour les fonctions chiffre et dechiffre
     assert(dechiffre(chiffre('ALEXANDRE'))=='ALEXANDRE')
+    print('codageAlphabet => {}'.format(codageAlphabet))
+    print('message chiffré => {}'.format(chiffre('ALEXANDRE')))
+    print('message déchiffré => {}'.format(dechiffre(chiffre('ALEXANDRE'))))
+	# #test pour les fonctions chiffre et dechiffre
