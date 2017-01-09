@@ -79,11 +79,13 @@ def DecodageAlphabet(IntA):
         if IntA == codageAlphabet[i]:
             return i
 
-# def EntierLettre(lettre):
-#     return ord(lettre)
-#
-# def aPuisBModuloN(intA,intB,intMod):
-#
+def EntierLettre(lettre):
+    return ord(lettre)
+
+def aPuisBModuloN(intA,intB,intMod):
+   mod = intA%intMod
+   return (mod**intB)%intMod
+
 # def chiffre(message):
 #
 # def dechiffre(intA):
