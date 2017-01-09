@@ -85,9 +85,18 @@ def aPuisBModuloN(intA,intB,intMod):
    mod = intA%intMod
    return (mod**intB)%intMod
 
-# def chiffre(message):
-#
-# def dechiffre(intA):
+def chiffre(message):
+	messageChiffre = []
+	for i in message :
+		chiffre = EntierLettre(i)
+		chiffre = aPuisBModuloN(chiffre, e, n)
+		messageChiffre.append(chiffre)
+	return messageChiffre
+		
+
+def dechiffre(intA):
+	message=''
+	for i in intA :
 
 
 #####################################################################################
