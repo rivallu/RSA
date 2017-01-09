@@ -1,7 +1,7 @@
 #!/usr/bin/env python3.5
 #-*-coding:UTF-8-*-
 
-import math
+from math import sqrt
 
 #####################################################################################
 #                                       Variable Globale                            #
@@ -18,7 +18,7 @@ import math
 
 def IsFirst(intA):
     result=True
-    racine=int(math.sqrt(intA))
+    racine=int(sqrt(intA))
     for i in range(1,racine):
         reste=intA%i
         if reste==0 and i!=1:
@@ -51,11 +51,20 @@ def IsFirst(intA):
 # @return return : le paramètre de retour		                                    #
 #####################################################################################
 
-# def CalculInverse(inta, intMod):
-
-
+def CalculInverse(intA, intMod):
+    for i in range(intMod):
+        if (intA*i)%intMod==1:
+            return i
+    return -1
 if __name__ == '__main__':
+    # test pour la fonction IsFirst
     assert(IsFirst(40)==False)
     assert(IsFirst(7)==True)
     assert(IsFirst(517)==False)
     assert(IsFirst(173)==True)
+
+    # Test pour la fonction CalculInverse
+    assert(CalculInverse()==)
+    assert(CalculInverse()==)
+    assert(CalculInverse()==)
+    assert(CalculInverse()==)
