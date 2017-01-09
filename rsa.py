@@ -66,6 +66,11 @@ def TrouvePremier(max):
 		valid = IsFirst(premier)
 	return premier
 
+#####################################################################################
+# Initialise une liste contenant l'alphabet						                    #
+# @return codageAlphabet : la liste contenant je sais quoi                          #
+#####################################################################################
+
 def initialiseCodageAlphabet():
     for i in range(0,215):
         if SontPremierEntreEux(i,215):
@@ -74,20 +79,45 @@ def initialiseCodageAlphabet():
             if not( i in codageAlphabet):
                 codageAlphabet.append(i)
 
+#####################################################################################
+# Retourne la position de la lettre donnée						                    #
+# @param intA : le chiffre à chercher dans codageAlphabet                           #
+# @return i : la position de la lettre  		                                    #
+#####################################################################################
+
 def DecodageAlphabet(intA):
     for i in range(0, len(codageAlphabet)) :
         if intA == codageAlphabet[i]:
             return i
 
+#####################################################################################
+# Fait corespondre à une lettre son codage alphabet				                    #
+# @param lettre : la lettre a cherché                                               #
+# @return codageAlphabet : son codage associé	                                    #
+#####################################################################################
+
 def EntierLettre(lettre):
     i=ord(lettre)-65
     return codageAlphabet[i]
 
+#####################################################################################
+# génère le modulo du chiffre donnée							                    #
+# @param intA : le chiffre                                                          #
+# @param intB : la clé publique                                                     #
+# @param intMod : Le modulo                                                         #
+# @return return : le paramètre de retour		                                    #
+#####################################################################################
+
 def aPuisBModuloN(intA,intB,intMod):
-   # mod = intA%intMod
-   # result=(mod**intB)%intMod
-   result=(intA**intB)%intMod
+   mod = intA%intMod
+   result=(mod**intB)%intMod
    return result
+
+#####################################################################################
+# chiffre un message donnée   									                    #
+# @param message : le message a chiffré                                             #
+# @return messageChiffre : le message chiffré	                                    #
+#####################################################################################
 
 def chiffre(message):
     messageChiffre = []
@@ -96,6 +126,12 @@ def chiffre(message):
         chiffre = aPuisBModuloN(chiffre, e, n)
         messageChiffre.append(chiffre)
     return messageChiffre
+
+#####################################################################################
+# Déchiffre le message donnée									                    #
+# @param intA : le message a déchiffré                                              #
+# @return message : le message déchiffré		                                    #
+#####################################################################################
 
 def dechiffre(intA):
     message=''
@@ -107,9 +143,10 @@ def dechiffre(intA):
 
 
 #####################################################################################
-# Description de la fonction									                    #
-# @param param : le paramètre                                                       #
-# @return return : le paramètre de retour		                                    #
+# Calcule l'inverse d'un nombre par rapport à un modulo			                    #
+# @param intA : le chiffre                                                          #
+# @param intMod : le modulo                                                         #
+# @return i : l'inverse du chiffre voulu		                                    #
 #####################################################################################
 
 def CalculInverse(intA, intMod):
@@ -143,6 +180,9 @@ if __name__ == '__main__':
 
     initialiseCodageAlphabet()
     assert(dechiffre(chiffre('ALEXANDRE'))=='ALEXANDRE')
+    assert(dechiffre(chiffre('LUCAS'))=='LUCAS')
+    assert(dechiffre(chiffre('XYLOPHONE'))=='XYLOPHONE')
+
     print('codageAlphabet => {}'.format(codageAlphabet))
     print('message chiffré => {}'.format(chiffre('ALEXANDRE')))
     print('message déchiffré => {}'.format(dechiffre(chiffre('ALEXANDRE'))))
