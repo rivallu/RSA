@@ -4,6 +4,7 @@
 
 from math import sqrt
 import random as rd
+import time
 
 #####################################################################################
 #                                       Variable Globale                            #
@@ -71,13 +72,18 @@ def TrouvePremier(max):
 # @return codageAlphabet : la liste contenant je sais quoi                          #
 #####################################################################################
 
-def initialiseCodageAlphabet():
-    for i in range(0,215):
-        if SontPremierEntreEux(i,215):
-            if len(codageAlphabet)==26:
-                return codageAlphabet
-            if not( i in codageAlphabet):
-                codageAlphabet.append(i)
+def initialiseCodageAlphabet(max):
+    while(len(codageAlphabet)<26):
+        i=rd.randint(1,214)
+        if SontPremierEntreEux(i,n) and i not in codageAlphabet:
+            codageAlphabet.append(i)
+
+    # for i in range(0,215):
+    #     if SontPremierEntreEux(i,n):
+    #         if len(codageAlphabet)==26:
+    #             return codageAlphabet
+    #         if not( i in codageAlphabet):
+    #             codageAlphabet.append(i)
 
 #####################################################################################
 # Retourne la position de la lettre donnée						                    #
@@ -88,6 +94,7 @@ def initialiseCodageAlphabet():
 def DecodageAlphabet(intA):
     for i in range(0, len(codageAlphabet)) :
         if intA == codageAlphabet[i]:
+            print("l'indice trouvé: {}".format(i))
             return i
 
 #####################################################################################
@@ -125,6 +132,7 @@ def chiffre(message):
         chiffre = EntierLettre(i)
         chiffre = aPuisBModuloN(chiffre, e, n)
         messageChiffre.append(chiffre)
+    print('message chiffré => {}'.format(messageChiffre))
     return messageChiffre
 
 #####################################################################################
@@ -136,9 +144,13 @@ def chiffre(message):
 def dechiffre(intA):
     message=''
     for i in intA :
+        print('le chiffre à déchiffré: {}'.format(i))
         i = (i**d)%n
+        print('le chiffre à chercher dans le codageAlphabet: {}'.format(i))
         i = DecodageAlphabet(i)
+        print("la lettre déchiffré est : {}".format(Alphabet[i]))
         message += Alphabet[i]
+    print('message déchiffré => {}'.format(message))
     return message
 
 
@@ -154,6 +166,19 @@ def CalculInverse(intA, intMod):
         if (intA*i)%intMod==1:
             return i
     return -1
+
+#####################################################################################
+# Mesure le temps d'execution d'une fonction            		                    #
+# @param function : la fonction à mesuré                                            #
+# @param *args : les arguments de la fonction à mesuré                              #
+#####################################################################################
+
+def mesureTemps(function, *args):
+    tmp1=time.clock()
+    function(*args)
+    tmp2=time.clock()
+    tmp=tmp2-tmp1
+    print("le temps d'execution de la fonction {function} est de {tmp}".format(function=function.__name__,tmp=tmp))
 
 if __name__ == '__main__':
     # test pour la fonction IsFirst
@@ -178,12 +203,29 @@ if __name__ == '__main__':
     assert(aPuisBModuloN(10,3,11)==10)
     assert(aPuisBModuloN(5,2,25)==0)
 
-    initialiseCodageAlphabet()
+    #test pour les fonctions chiffre et dechiffre
+    initialiseCodageAlphabet(n)
+    print(codageAlphabet)
+    print('p = {p} q={q} e={e} d={d} n={n}'.format(p=p,q=q,e=e,d=d,n=n))
     assert(dechiffre(chiffre('ALEXANDRE'))=='ALEXANDRE')
-    assert(dechiffre(chiffre('LUCAS'))=='LUCAS')
-    assert(dechiffre(chiffre('XYLOPHONE'))=='XYLOPHONE')
+    # assert(dechiffre(chiffre('LUCAS'))=='LUCAS')
+    # assert(dechiffre(chiffre('XYLOPHONE'))=='XYLOPHONE')
+    #
+    # print('codageAlphabet => {}'.format(codageAlphabet))
+    # print('message chiffré => {}'.format(chiffre('ALEXANDRE')))
+    # print('message déchiffré => {}'.format(dechiffre(chiffre('ALEXANDRE'))))
 
+
+    p=TrouvePremier(50)
+    q=TrouvePremier(50)
+    n=p*q
+    Phin=(p-1)*(q-1)
+    e=rd.randint(2, Phin)
+    while not(SontPremierEntreEux(e,Phin)):
+        e=rd.randint(2,Phin)
+    d=CalculInverse(e,Phin)
+    assert(d!=-1)
+    initialiseCodageAlphabet(n)
+    print('p = {p} q={q} e={e} d={d} n={n}'.format(p=p,q=q,e=e,d=d,n=n))
     print('codageAlphabet => {}'.format(codageAlphabet))
-    print('message chiffré => {}'.format(chiffre('ALEXANDRE')))
-    print('message déchiffré => {}'.format(dechiffre(chiffre('ALEXANDRE'))))
-	# #test pour les fonctions chiffre et dechiffre
+    dechiffre(chiffre('ALEXANDRE'))
