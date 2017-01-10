@@ -203,6 +203,8 @@ if __name__ == '__main__':
     assert(aPuisBModuloN(10,3,11)==10)
     assert(aPuisBModuloN(5,2,25)==0)
 
+
+    # TODO: Fix the decodage probleme
     #test pour les fonctions chiffre et dechiffre
     initialiseCodageAlphabet(n)
     print(codageAlphabet)
