@@ -73,17 +73,17 @@ def TrouvePremier(max):
 #####################################################################################
 
 def initialiseCodageAlphabet(max):
-    while(len(codageAlphabet)<26):
-        i=rd.randint(1,214)
-        if SontPremierEntreEux(i,n) and i not in codageAlphabet:
-            codageAlphabet.append(i)
+    # while(len(codageAlphabet)<26):
+    #     i=rd.randint(1,214)
+    #     if SontPremierEntreEux(i,n) and i not in codageAlphabet:
+    #         codageAlphabet.append(i)
 
-    # for i in range(0,215):
-    #     if SontPremierEntreEux(i,n):
-    #         if len(codageAlphabet)==26:
-    #             return codageAlphabet
-    #         if not( i in codageAlphabet):
-    #             codageAlphabet.append(i)
+    for i in range(0,215):
+        if SontPremierEntreEux(i,n):
+            if len(codageAlphabet)==26:
+                return codageAlphabet
+            if not( i in codageAlphabet):
+                codageAlphabet.append(i)
 
 #####################################################################################
 # Retourne la position de la lettre donnée						                    #
@@ -94,7 +94,6 @@ def initialiseCodageAlphabet(max):
 def DecodageAlphabet(intA):
     for i in range(0, len(codageAlphabet)) :
         if intA == codageAlphabet[i]:
-            print("l'indice trouvé: {}".format(i))
             return i
 
 #####################################################################################
@@ -128,6 +127,7 @@ def aPuisBModuloN(intA,intB,intMod):
 
 def chiffre(message):
     messageChiffre = []
+    message=message.upper()
     for i in message :
         chiffre = EntierLettre(i)
         chiffre = aPuisBModuloN(chiffre, e, n)
@@ -144,11 +144,8 @@ def chiffre(message):
 def dechiffre(intA):
     message=''
     for i in intA :
-        print('le chiffre à déchiffré: {}'.format(i))
         i = (i**d)%n
-        print('le chiffre à chercher dans le codageAlphabet: {}'.format(i))
         i = DecodageAlphabet(i)
-        print("la lettre déchiffré est : {}".format(Alphabet[i]))
         message += Alphabet[i]
     print('message déchiffré => {}'.format(message))
     return message
@@ -210,16 +207,12 @@ if __name__ == '__main__':
     print(codageAlphabet)
     print('p = {p} q={q} e={e} d={d} n={n}'.format(p=p,q=q,e=e,d=d,n=n))
     assert(dechiffre(chiffre('ALEXANDRE'))=='ALEXANDRE')
-    # assert(dechiffre(chiffre('LUCAS'))=='LUCAS')
-    # assert(dechiffre(chiffre('XYLOPHONE'))=='XYLOPHONE')
+    assert(dechiffre(chiffre('LUCAS'))=='LUCAS')
+    assert(dechiffre(chiffre('XYLOPHONE'))=='XYLOPHONE')
+
     #
-    # print('codageAlphabet => {}'.format(codageAlphabet))
-    # print('message chiffré => {}'.format(chiffre('ALEXANDRE')))
-    # print('message déchiffré => {}'.format(dechiffre(chiffre('ALEXANDRE'))))
-
-
-    p=TrouvePremier(50)
-    q=TrouvePremier(50)
+    p=TrouvePremier(500)
+    q=TrouvePremier(500)
     n=p*q
     Phin=(p-1)*(q-1)
     e=rd.randint(2, Phin)
@@ -231,3 +224,15 @@ if __name__ == '__main__':
     print('p = {p} q={q} e={e} d={d} n={n}'.format(p=p,q=q,e=e,d=d,n=n))
     print('codageAlphabet => {}'.format(codageAlphabet))
     dechiffre(chiffre('ALEXANDRE'))
+
+    #Test message donnée par l'utilisateur
+    message=input("Votre message à chiffré:\n")
+    p=TrouvePremier(50)
+    q=TrouvePremier(50)
+    n=p*q
+    Phin=(p-1)*(q-1)
+    e=rd.randint(2, Phin)
+    while not(SontPremierEntreEux(e,Phin)):
+        e=rd.randint(2,Phin)
+    initialiseCodageAlphabet(n)
+    dechiffre(chiffre(message))
